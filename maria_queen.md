@@ -31,9 +31,6 @@
    - Αν κάποια μεταβλητή μείνει χωρίς διαθέσιμες τιμές, τότε απορρίπτουμε τον συγκεκριμένο κλάδο του δέντρου και επιστρέφουμε στον προηγούμενο κόμβο.
    
    **Tο Δέντρο Αναζήτησης - Forward Checking (το έχω "ζωγραφίσει" πλάγια)**:
-
-
-
    ~~~
 	Root (Start - No Queens placed)
 	├── Queen 1 at (1,1)
@@ -78,8 +75,6 @@
 
    **Tο Δέντρο Αναζήτησης - MAC**:
 
-
-MAC
    ~~~
 	Root (Start - No Queens placed)
 	├── Queen 1 at (1,1) ❌ (Failure) [Step 2 IN IMAGE]
@@ -94,6 +89,8 @@ MAC
 	Queen 1 at (1,4) is analogous-symmetrical to Queen 1 at (1,1) and leads to failure ❌ (Failure)
 	Queen 1 at (1,3) is analogous-symmetrical to Queen 1 at (1,2) and leads to solution ✔️ (Solution)
    ~~~
+
+
    Το δέντρο είναι συμμετρικό (αναγράφω τις συμμετρικές-ανάλογες περιπτώσεις)
 
 3. **Παρατηρήσεις για την Απόδοση και Κόστος**:
