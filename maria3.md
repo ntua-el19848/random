@@ -4,117 +4,114 @@
 
 ##### Έχουμε τα παρακάτω αξιώματα ΚΛΠΤ που περιγράφουν τις ζητούμενες σχέσεις
 
-### Updated FOPC Rules (with "woman" and "man")
+1. **Μητέρα και Πατέρας**:
+   - **Μητέρα**: 
+     ```
+     ∀x ∀y (γονιός(x, y) ∧ γυναίκα(x) → μητέρα(x, y))
+     ```
+     (Αν x είναι γονιός του y και η x είναι γυναίκα, τότε η x είναι η μητέρα του y.)
 
-1. **Mother and Father**:
-   - **Mother**: 
-     \[
-     \forall x \, \forall y \, (parent(x, y) \land woman(x) \Rightarrow mother(x, y))
-     \]
-     (If x is a parent of y and x is a woman, then x is the mother of y.)
+   - **Πατέρας**: 
+     ```
+     ∀x ∀y (γονιός(x, y) ∧ άντρας(x) → πατέρας(x, y))
+     ```
+     (Αν x είναι γονιός του y και η x είναι άντρας, τότε η x είναι ο πατέρας του y.)
 
-   - **Father**: 
-     \[
-     \forall x \, \forall y \, (parent(x, y) \land man(x) \Rightarrow father(x, y))
-     \]
-     (If x is a parent of y and x is a man, then x is the father of y.)
+2. **Σχέσεις Παππού και Γιαγιά**:
+   - **Παππούς**: 
+     ```
+     ∀x ∀y ∀z ((γονιός(x, z) ∧ γονιός(z, y)) ∧ άντρας(x) → παππούς(x, y))
+     ```
+     (Αν x είναι γονιός του z και το z είναι γονιός του y, και η x είναι άντρας, τότε η x είναι ο παππούς του y.)
 
-2. **Grandparent Relations**:
-   - **Grandfather**: 
-     \[
-     \forall x \, \forall y \, \forall z \, ((parent(x, z) \land parent(z, y)) \land man(x) \Rightarrow grandfather(x, y))
-     \]
-     (If x is a parent of z and z is a parent of y, and x is a man, then x is the grandfather of y.)
+   - **Γιαγιά**: 
+     ```
+     ∀x ∀y ∀z ((γονιός(x, z) ∧ γονιός(z, y)) ∧ γυναίκα(x) → γιαγιά(x, y))
+     ```
+     (Αν x είναι γονιός του z και το z είναι γονιός του y, και η x είναι γυναίκα, τότε η x είναι η γιαγιά του y.)
 
-   - **Grandmother**: 
-     \[
-     \forall x \, \forall y \, \forall z \, ((parent(x, z) \land parent(z, y)) \land woman(x) \Rightarrow grandmother(x, y))
-     \]
-     (If x is a parent of z and z is a parent of y, and x is a woman, then x is the grandmother of y.)
+3. **Εγγονός**:
+   ```
+   ∀x ∀y ∃z (γονιός(y, z) ∧ γονιός(z, x) → εγγονός(x, y))
+   ```
+   (Αν y είναι γονιός του z και το z είναι γονιός του x, τότε το x είναι εγγονός του y.)
 
-3. **Grandchild**:
-   \[
-   \forall x \, \forall y \, \exists z \, (parent(y, z) \land parent(z, x) \Rightarrow grandchild(x, y))
-   \]
-   (If y is a parent of z and z is a parent of x, then x is the grandchild of y.)
+4. **Αδέλφια (Αδελφός και Αδελφή)**:
+- **Αδελφός**: 
+  ```
+  ∀x ∀y ∀z (γονιός(z, x) ∧ γονιός(z, y) ∧ άντρας(x) ∧ x ≠ y → αδελφός(x, y))
+  ```
+  (Αν το z είναι γονιός και των x και y, και το x είναι άντρας και το x δεν είναι ίσο με το y, τότε το x είναι ο αδελφός του y.)
 
-4. **Siblings (Brother and Sister)**:
-   - **Brother**: 
-     \[
-     \forall x \, \forall y \, \forall z \, (parent(z, x) \land parent(z, y) \land man(x) \land x \neq y \Rightarrow brother(x, y))
-     \]
-     (If z is a parent of both x and y, and x is a man and x is not equal to y, then x is the brother of y.)
+- **Αδελφή**:
+  ```
+  ∀x ∀y ∀z (γονιός(z, x) ∧ γονιός(z, y) ∧ γυναίκα(x) ∧ x ≠ y → αδελφή(x, y))
+  ```
+  (Αν το z είναι γονιός και των x και y, και το x είναι γυναίκα και το x δεν είναι ίσο με το y, τότε το x είναι η αδελφή του y.)
 
-   - **Sister**:
-     \[
-     \forall x \, \forall y \, \forall z \, (parent(z, x) \land parent(z, y) \land woman(x) \land x \neq y \Rightarrow sister(x, y))
-     \]
-     (If z is a parent of both x and y, and x is a woman and x is not equal to y, then x is the sister of y.)
+5. **Γιος και Κόρη**:
+- **Γιος**: 
+  ```
+  ∀x ∀y (γονιός(y, x) ∧ άντρας(x) → γιος(x, y))
+  ```
+  (Αν y είναι γονιός του x και το x είναι άντρας, τότε το x είναι ο γιος του y.)
 
-5. **Son and Daughter**:
-   - **Son**: 
-     \[
-     \forall x \, \forall y \, (parent(y, x) \land man(x) \Rightarrow son(x, y))
-     \]
-     (If y is a parent of x and x is a man, then x is the son of y.)
+- **Κόρη**: 
+  ```
+  ∀x ∀y (γονιός(y, x) ∧ γυναίκα(x) → κόρη(x, y))
+  ```
+  (Αν y είναι γονιός του x και το x είναι γυναίκα, τότε το x είναι η κόρη του y.)
 
-   - **Daughter**: 
-     \[
-     \forall x \, \forall y \, (parent(y, x) \land woman(x) \Rightarrow daughter(x, y))
-     \]
-     (If y is a parent of x and x is a woman, then x is the daughter of y.)
+6. **Θείος και Θεία**:
+- **Θείος**: 
+  ```
+  ∀x ∀y ∃z (γονιός(z, y) ∧ αδελφός(x, z) → θείος(x, y))
+  ```
+  (Αν το z είναι γονιός του y και το x είναι ο αδελφός του z, τότε το x είναι ο θείος του y.)
 
-6. **Uncle and Aunt**:
-   - **Uncle**: 
-     \[
-     \forall x \, \forall y \, \exists z \, (parent(z, y) \land brother(x, z) \Rightarrow uncle(x, y))
-     \]
-     (If z is a parent of y and x is the brother of z, then x is the uncle of y.)
+- **Θεία**:
+  ```
+  ∀x ∀y ∃z (γονιός(z, y) ∧ αδελφή(x, z) → θεία(x, y))
+  ```
+  (Αν το z είναι γονιός του y και το x είναι η αδελφή του z, τότε το x είναι η θεία του y.)
 
-   - **Aunt**:
-     \[
-     \forall x \, \forall y \, \exists z \, (parent(z, y) \land sister(x, z) \Rightarrow aunt(x, y))
-     \]
-     (If z is a parent of y and x is the sister of z, then x is the aunt of y.)
+7. **Πρώτος Ξάδερφος/η**:
+- **Πρώτος Ξάδερφος**:
+  ```
+  ∀x ∀y ∃z (((θείος(z, y) ∧ γιος(x, z))∨(θεία(z, y) ∧ γιος(x, z))) → πρώτος_ξάδερφος(x, y))
+  ```
+  (Αν το z είναι ο θείος του y και το x είναι ο γιος του z, τότε το x είναι ο πρώτος ξάδερφος του y και είναι άντρας.)
 
-7. **First Cousin**:
-   - **First Cousin (Man)**:
-     \[
-     \forall x \, \forall y \, \exists z \, (uncle(z, y) \land son(x, z) \Rightarrow first\_cousin\_man(x, y))
-     \]
-     (If z is the uncle of y and x is the son of z, then x is a man first cousin of y.)
+- **Πρώτη Ξάδερφη**:
+  ```
+  ∀x ∀y ∃z (((θεία(z, y) ∧ κόρη(x, z))∨(θείος(z, y) ∧ κόρη(x, z))) → πρώτη_ξαδέρφη(x, y))
+  ```
+  (Αν το z είναι η θεία του y και το x είναι η κόρη του z, τότε το x είναι η πρώτη ξαδέρφη του y και είναι γυναίκα.)
 
-   - **First Cousin (Woman)**:
-     \[
-     \forall x \, \forall y \, \exists z \, (aunt(z, y) \land daughter(x, z) \Rightarrow first\_cousin\_woman(x, y))
-     \]
-     (If z is the aunt of y and x is the daughter of z, then x is a woman first cousin of y.)
+8. **Προ-παππούς**:
+- **Προ-παππούς**:
+  ```
+  ∀x ∀y ∃z (γονιός(x, z) ∧ παππούς(z, y) → προ_παππούς(x, y))
+  ```
+  (Αν x είναι γονιός του z και το z είναι ο παππούς του y, τότε το x είναι ο προ-παππούς του y.)
 
-8. **Great-Grandparent**:
-   - **Great-Grandfather**:
-     \[
-     \forall x \, \forall y \, \exists z \, (parent(x, z) \land grandfather(z, y) \Rightarrow great\_grandfather(x, y))
-     \]
-     (If x is a parent of z and z is a grandfather of y, then x is a great-grandfather of y.)
+- **Προ-γιαγιά**:
+  ```
+  ∀x ∀y ∃z (γονιός(x, z) ∧ γιαγιά(z, y) → προ_γιαγιά(x, y))
+  ```
+  (Αν x είναι γονιός του z και το z είναι η γιαγιά του y, τότε το x είναι η προ-γιαγιά του y.)
 
-   - **Great-Grandmother**:
-     \[
-     \forall x \, \forall y \, \exists z \, (parent(x, z) \land grandmother(z, y) \Rightarrow great\_grandmother(x, y))
-     \]
-     (If x is a parent of z and z is a grandmother of y, then x is a great-grandmother of y.)
+9. **Πρόγονος**:
+    ```
+    ∀x ∀y (γονιός(x, y) → πρόγονος(x, y))
+    ```
+   (Αν x είναι γονιός του y, τότε το x είναι πρόγονος του y.)
 
-9. **Ancestor**:
-   \[
-   \forall x \, \forall y \, (parent(x, y) \Rightarrow ancestor(x, y))
-   \]
-   (If x is a parent of y, then x is an ancestor of y.)
-
-   For indirect ancestors, the rule is:
-   \[
-   \forall x \, \forall y \, \forall z \, (parent(x, z) \land ancestor(z, y) \Rightarrow ancestor(x, y))
-   \]
-   (If x is a parent of z and z is an ancestor of y, then x is also an ancestor of y.)
-
+   Για έμμεσους προγόνους, ο κανόνας είναι:
+   ```
+   ∀x ∀y ∀z (γονιός(x, z) ∧ πρόγονος(z, y) → πρόγονος(x, y))
+   ```
+   (Αν x είναι γονιός του z και το z είναι πρόγονος του y, τότε το x είναι επίσης πρόγονος του y.)
 
 ### B ΕΡΩΤΗΜΑ
 
