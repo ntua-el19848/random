@@ -121,6 +121,9 @@
 % Γονείς
 parent(george, elizabeth).
 parent(mum, elizabeth).
+parent(george, margaret).
+parent(mum, margaret).
+
 parent(elizabeth, charles).
 parent(elizabeth, anne).
 parent(elizabeth, andrew).
@@ -129,24 +132,49 @@ parent(philip, charles).
 parent(philip, anne).
 parent(philip, andrew).
 parent(philip, edward).
+
+parent(spencer, diana).
+parent(kydd, diana).
+
 parent(charles, william).
 parent(charles, harry).
+parent(diana, william).
+parent(diana, harry).
+
 parent(anne, peter).
 parent(anne, zara).
+parent(anne, mark).
+parent(anne, mark).
+
 parent(andrew, beatrice).
 parent(andrew, eugenie).
+parent(sarah, eugenie).
+parent(sarah, beatrice).
+
 parent(edward, louise).
 parent(edward, james).
+parent(sophie, louise).
+parent(sophie, james).
 
 % Σχέση Γάμου (για πληρότητα)
+married(george, mum).
+married(mum, george).
+
 married(elizabeth, philip).
 married(philip, elizabeth).
+
+married(spencer, kydd).
+married(kydd, spencer).
+
 married(charles, diana).
 married(diana, charles).
+
 married(anne, mark).
 married(mark, anne).
+
 married(andrew, sarah).
 married(sarah, andrew).
+
 married(edward, sophie).
 married(sophie, edward).
 
@@ -166,6 +194,7 @@ woman(beatrice).
 woman(eugenie).
 woman(louise).
 woman(zara).
+woman(kydd).
 
 man(george).
 man(philip).
@@ -174,7 +203,6 @@ man(mark).
 man(andrew).
 man(edward).
 man(spencer).
-man(kidd).
 man(william).
 man(harry).
 man(peter).
