@@ -1,6 +1,6 @@
 # ASKHSH 3
 
-### Α ΕΡΩΤΗΜΑ 
+## Α ΕΡΩΤΗΜΑ 
 
 ##### Έχουμε τα παρακάτω αξιώματα ΚΛΠΤ που περιγράφουν τις ζητούμενες σχέσεις
 
@@ -113,7 +113,7 @@
    ```
    (Αν x είναι γονιός του z και το z είναι πρόγονος του y, τότε το x είναι επίσης πρόγονος του y.)
 
-### B ΕΡΩΤΗΜΑ
+## B ΕΡΩΤΗΜΑ
 
 ##### Ορισμός βασικών σχέσεων βάση του γενεολογικού δέντρου που δόθηκε
 Παρακάτω φαίνεται η σχέση όλων των ανθρώπων μεταξύ τους σε γλώσσα Prolog αντίστοιχα με το διάγραμμα
@@ -179,12 +179,7 @@ man(william).
 man(harry).
 man(peter).
 man(james).
-```
 
-
-##### Παράγωγες σχέσεις
-
-```prolog
 % Παππούς/Γιαγιά
 grandfather(X, Y) :- parent(X, Z), parent(Z, Y), man(X).
 grandmother(X, Y) :- parent(X, Z), parent(Z, Y), woman(X).
@@ -213,19 +208,72 @@ first_cousin_man(X, Y) :-
 first_cousin_woman(X, Y) :-
     uncle(Z, Y), daughter(X, Z).
 first_cousin_woman(X, Y) :-
-    aunt(Z, Y), daughter(X, Z)
+    aunt(Z, Y), daughter(X, Z).
 
 % Προ-πάππους/Προ-γιαγιά
-great_grandfather(X, Y) :- parent(X, Z), grandfather(Z, Y).
-great_grandmother(X, Y) :- parent(X, Z), grandmother(Z, Y).
+great_grandfather(X, Y) :- father(X, Z), grandchild(Y, Z).
+great_grandmother(X, Y) :- mother(X, Z), grandchild(Y, Z).
 
 % Πρόγονος
 ancestor(X, Y) :- parent(X, Y).
 ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
-
 ```
 
 
-### Β ΕΡΩΤΗΜΑ
+## Γ ΕΡΩΤΗΜΑ
+
+1. **Ποια είναι τα εγγόνια της Elizabeth;**:
+   ```prolog
+   grandchild(X, elizabeth).
+   ```
+   Και η έξοδος είναι:
+   ```prolog
+   ?- grandchild(X, elizabeth).
+   X = william ;
+   X = harry ;
+   X = peter ;
+   X = zara ;
+   X = beatrice ;
+   X = eugenie ;
+   X = louise ;
+   X = james.
+   ```
+
+2. **Ποιοι είναι προπάπποι/προγιαγιάδες της Zara;**:
+   ```prolog
+   great_grandfather(X, zara).
+   ```
+   Και η έξοδος είναι:
+   ```prolog
+   X= george ;
+   ```
+   ```prolog
+   great_grandmother(X, zara).
+   ```
+   Και η έξοδος είναι:
+   ```prolog
+   X= mum ;
+   ```
 
 
+3. **Ποιοι είναι οι πρόγονοι της Eugenie;**: 
+   ```prolog
+   ancestor(X, eugenie).
+   ```
+   Και η έξοδος είναι:
+   ```prolog
+   X = andrew ;
+   X = sarah ;
+   X = george ;
+   X = mum ;
+   X = elizabeth ;
+   X = philip ;
+   ```
+
+
+## Δ ΕΡΩΤΗΜΑ
+
+
+
+
+   
