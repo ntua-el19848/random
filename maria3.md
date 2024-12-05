@@ -301,7 +301,195 @@ ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
 
 ## Δ ΕΡΩΤΗΜΑ
 
+- Για Πρώτα ξαδέλφια:
+   Δύο άτομα είναι πρώτα ξαδέλφια αν οι γονείς τους είναι αδέλφια (brother ή sister), και δεν είναι το ίδιο άτομο.
+
+- Για Δεύτερα και ανώτερα ξαδέλφια:
+   Αναδρομικά, δύο άτομα είναι ξαδέλφια αν οι γονείς τους είναι ξαδέλφια.
+  
+Έτσι ο Prolog κώδικας που επεκτείνει την ιδιότητα "ξάδερφος" είναι ο παρακάτω:
+
+```prolog
+% Ξάδελφος: Πρώτα ξαδέλφια
+cousin(X, Y) :- 
+    parent(Z1, X), 
+    parent(Z2, Y), 
+    (brother(Z1, Z2) ; sister(Z1, Z2)), 
+    X \= Y.
+
+% Ξάδελφος: Αναδρομή για δεύτερα και ανώτερα ξαδέλφια
+cousin(X, Y) :- 
+    parent(Z1, X), 
+    parent(Z2, Y), 
+    cousin(Z1, Z2), 
+    X \= Y.
+```
+
+Και εισάγουμε την Margarita ως εγγόνι της margaret με τον εξής τρόπο (έστω ότι ο γίος της margaret που έχει κόρη την margarita λέγεται son): 
+
+```prolog
+parent(margaret, son).
+parent(son, margarita).
+```
+
+Έτσι το query για να πάρουμε όλα τα ξαδέρφια του william (χωρίς duplicates) είναι το εξής:
+
+```prolog
+?- findall(X, cousin(X, william), Cousins), list_to_set(Cousins, DistinctCousins), write(DistinctCousins).
+```
+
+Και η έξοδος φαίνεται παρακάτω:
 
 
 
    
+Ο τελικός κώδικας φαίνεται παρακάτω:
+
+```prolog
+% Γονείς
+parent(george, elizabeth).
+parent(mum, elizabeth).
+parent(george, margaret).
+parent(mum, margaret).
+
+parent(elizabeth, charles).
+parent(elizabeth, anne).
+parent(elizabeth, andrew).
+parent(elizabeth, edward).
+parent(philip, charles).
+parent(philip, anne).
+parent(philip, andrew).
+parent(philip, edward).
+
+parent(spencer, diana).
+parent(kydd, diana).
+
+parent(charles, william).
+parent(charles, harry).
+parent(diana, william).
+parent(diana, harry).
+
+parent(anne, peter).
+parent(anne, zara).
+parent(anne, mark).
+parent(anne, mark).
+
+parent(andrew, beatrice).
+parent(andrew, eugenie).
+parent(sarah, eugenie).
+parent(sarah, beatrice).
+
+parent(edward, louise).
+parent(edward, james).
+parent(sophie, louise).
+parent(sophie, james).
+
+% Για το δ ερώτημα
+parent(margaret, son).
+parent(son, margarita).
+
+% Σχέση Γάμου (για πληρότητα)
+married(george, mum).
+married(mum, george).
+
+married(elizabeth, philip).
+married(philip, elizabeth).
+
+married(spencer, kydd).
+married(kydd, spencer).
+
+married(charles, diana).
+married(diana, charles).
+
+married(anne, mark).
+married(mark, anne).
+
+married(andrew, sarah).
+married(sarah, andrew).
+
+married(edward, sophie).
+married(sophie, edward).
+
+% Βοηθητική Σχέση - Μητέρα και Πατέρας
+mother(X, Y) :- parent(X, Y), woman(X).
+father(X, Y) :- parent(X, Y), man(X).
+
+% Φύλο (για βοηθητικούς κανόνες)
+woman(elizabeth).
+woman(mum).
+woman(margaret).
+woman(diana).
+woman(anne).
+woman(sarah).
+woman(sophie).
+woman(beatrice).
+woman(eugenie).
+woman(louise).
+woman(zara).
+woman(kydd).
+
+man(george).
+man(philip).
+man(charles).
+man(mark).
+man(andrew).
+man(edward).
+man(spencer).
+man(william).
+man(harry).
+man(peter).
+man(james).
+
+% Παππούς/Γιαγιά
+grandfather(X, Y) :- parent(X, Z), parent(Z, Y), man(X).
+grandmother(X, Y) :- parent(X, Z), parent(Z, Y), woman(X).
+
+% Εγγόνι
+grandchild(X, Y) :- parent(Y, Z), parent(Z, X).
+
+% Αδερφός/Αδερφή
+brother(X, Y) :- parent(Z, X), parent(Z, Y), man(X), X \= Y.
+sister(X, Y) :- parent(Z, X), parent(Z, Y), woman(X), X \= Y.
+
+% Κόρη/Γιος
+son(X, Y) :- parent(Y, X), man(X).
+daughter(X, Y) :- parent(Y, X), woman(X).
+
+% Θείος/Θεία
+uncle(X, Y) :- parent(Z, Y), brother(X, Z).
+aunt(X, Y) :- parent(Z, Y), sister(X, Z).
+
+% Πρώτος Ξάδερφος/Ξαδέρφη
+first_cousin_man(X, Y) :-
+    uncle(Z, Y), son(X, Z).
+first_cousin_man(X, Y) :-
+    aunt(Z, Y), son(X, Z).
+
+first_cousin_woman(X, Y) :-
+    uncle(Z, Y), daughter(X, Z).
+first_cousin_woman(X, Y) :-
+    aunt(Z, Y), daughter(X, Z).
+
+% Προ-πάππους/Προ-γιαγιά
+great_grandfather(X, Y) :- father(X, Z), grandchild(Y, Z).
+great_grandmother(X, Y) :- mother(X, Z), grandchild(Y, Z).
+
+% Πρόγονος
+ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+
+
+% Ξάδελφος: Πρώτα ξαδέλφια
+cousin(X, Y) :- 
+    parent(Z1, X), 
+    parent(Z2, Y), 
+    (brother(Z1, Z2) ; sister(Z1, Z2)), 
+    X \= Y.
+
+% Ξάδελφος: Αναδρομή για δεύτερα και ανώτερα ξαδέλφια
+cousin(X, Y) :- 
+    parent(Z1, X), 
+    parent(Z2, Y), 
+    cousin(Z1, Z2), 
+    X \= Y.
+```
