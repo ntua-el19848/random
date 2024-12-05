@@ -267,24 +267,31 @@ ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
    X = james.
    ```
 
+   ![3g1](https://github.com/user-attachments/assets/d64fa1cc-3bcb-4460-a0c1-2530ca2ee89d)
+
+
 2. **Ποιοι είναι προπάπποι/προγιαγιάδες της Zara;**:
-   ```prolog
-   great_grandfather(X, zara).
-   ```
-   Και η έξοδος είναι:
-   ```prolog
-   X= george ;
-   ```
-   ```prolog
-   great_grandmother(X, zara).
-   ```
-   Και η έξοδος είναι:
-   ```prolog
-   X= mum ;
-   ```
+   - Για προ-πάππου:
+      ```prolog
+      great_grandfather(X, zara).
+      ```
+      Και η έξοδος είναι:
+      ```prolog
+      X= george ;
+      ```
+      ![3g21](https://github.com/user-attachments/assets/c2536791-38cb-4aea-98f1-3f7a32857404)
 
+   - Για προ-γιαγιά:
+      ```prolog
+      great_grandmother(X, zara).
+      ```
+      Και η έξοδος είναι:
+      ```prolog
+      X= mum ;
+      ```
+      ![3g22](https://github.com/user-attachments/assets/c7f37ca3-9e7d-402b-927d-17de818fed68)
 
-3. **Ποιοι είναι οι πρόγονοι της Eugenie;**: 
+4. **Ποιοι είναι οι πρόγονοι της Eugenie;**: 
    ```prolog
    ancestor(X, eugenie).
    ```
@@ -297,6 +304,8 @@ ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
    X = elizabeth ;
    X = philip ;
    ```
+   ![3g3](https://github.com/user-attachments/assets/03a1c050-41c2-4b1e-bb0a-a3d9ec25eed6)
+
 
 
 ## Δ ΕΡΩΤΗΜΑ
@@ -340,7 +349,7 @@ parent(son, margarita).
 
 Και η έξοδος φαίνεται παρακάτω:
 
-
+![3δ](https://github.com/user-attachments/assets/51dc7518-0c23-4cad-a256-7f21c1d52490)
 
    
 Ο τελικός κώδικας φαίνεται παρακάτω:
