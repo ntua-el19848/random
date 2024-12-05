@@ -352,7 +352,7 @@ parent(son, margarita).
 ![3δ](https://github.com/user-attachments/assets/51dc7518-0c23-4cad-a256-7f21c1d52490)
 
    
-Ο τελικός κώδικας φαίνεται παρακάτω:
+Ο τελικός κώδικας της άσκησης φαίνεται παρακάτω:
 
 ```prolog
 % Γονείς
