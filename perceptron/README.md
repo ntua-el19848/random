@@ -186,6 +186,11 @@ if __name__ == "__main__":
 ```
 ---
 
-## Output
+## Οι έξοδοι του προγράμματος
+Παρακάτω φαίνονται screenshots με διαφόρες εκτελέσεις του παραπάνω κώδικα. Παρατηρούμε πως υπάρχει διαφορά από εκτέλεση σε εκτέλεση, τόσο στα τελικά weights όσο και στο τελικό bias. Αυτό συμβαίνει επειδή η αρχικοποίηση των αρχικών βαρών γίνεται με τυχαίες τιμές.
+
 ![Screenshot 2025-01-02 225113](https://github.com/user-attachments/assets/f39c5fda-58ae-4c66-b214-89492716b40c)
+![Screenshot 2025-01-02 225427](https://github.com/user-attachments/assets/21c88d6a-f044-43dd-b907-3a3159293c8a)
+![Screenshot 2025-01-02 225454](https://github.com/user-attachments/assets/f05bb97d-f1cc-43ba-a895-b762b2c1449c)
+
 
